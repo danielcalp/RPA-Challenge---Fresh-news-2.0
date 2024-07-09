@@ -58,7 +58,7 @@ def start_get_news(main_url: str, search_input: str, section: str, months: int) 
             file.write(html_content)
         html_list_element = browser.find_elements('//html')[0]
         html_list_element.screenshot(f'output/current_screen.png')
-        if 'captcha__human' in html_content:
+        if 'geo.captcha-delivery' in html_content:
             logging.critical(f"GeoCaptcha has been detected, please use a VPN or Proxy on your system")
         raise
 
