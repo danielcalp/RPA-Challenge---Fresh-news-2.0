@@ -98,4 +98,4 @@ License
 This project is licensed under the MIT License.
 
 Contact
-For any questions or further information, please contact Your Name.
+For any questions or further information, please contact https://github.com/danielcalp/ or https://www.linkedin.com/in/danielpaschoalino/.
