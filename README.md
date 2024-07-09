@@ -1,62 +1,97 @@
-# Template: Python - Minimal
+# Robocorp Reuters News Automation
 
-If the tool is being detected by GeoCaptcha, try using a VPN or proxy on the system
+## Overview
 
-This template leverages the new [Python framework](https://github.com/robocorp/robocorp), the [libraries](https://github.com/robocorp/robocorp/blob/master/docs/README.md#python-libraries) from to same project as well.
+This project is a Python-based automation solution for extracting news data from the Reuters website. It was developed as part of the test for the Python Automation Engineer position at Otomatika. The goal is to showcase the ability to build a bot that automates the process of extracting and processing news data using Robocorp's RPA Framework.
 
-The template provides you with the basic structure of a Python project: logging out of the box and controlling your tasks without fiddling with the base Python stuff. The environment contains the most used libraries, so you do not have to start thinking about those right away. 
+## 🟢 The Challenge
 
-👉 Other templates are available as well via our tooling and on our [Portal](https://robocorp.com/portal/tag/template)
+The task is to automate the process of extracting news data from a chosen news site. For this test, the Reuters website was selected. The automation includes:
 
-## Running
+1. Opening the news site.
+2. Entering a search phrase and selecting a news category.
+3. Extracting news details such as title, date, description, and picture.
+4. Saving the data into an Excel file.
+5. Processing news based on a specified number of months.
 
-#### VS Code
-1. Get [Robocorp Code](https://robocorp.com/docs/developer-tools/visual-studio-code/extension-features) -extension for VS Code.
-1. You'll get an easy-to-use side panel and powerful command-palette commands for running, debugging, code completion, docs, etc.
+### The Source
 
-#### Command line
+The automation is implemented for the [Reuters](https://www.reuters.com/) website.
 
-1. [Get RCC](https://github.com/robocorp/rcc?tab=readme-ov-file#getting-started)
-1. Use the command: `rcc run`
+### Parameters
 
-## Results
+The process requires the following parameters via a Robocloud work item:
 
-🚀 After running the bot, check out the `log.html` under the `output` -folder.
+- `main_url`: The Reuters link do access the website.
+- `search_input`: The phrase to search for in the news.
+- `section`: The category or section of the news.
+- `months`: The number of months to retrieve news for (e.g., 1 for the current month, 2 for the current and previous month).
 
-## Dependencies
+### The Process
 
-We strongly recommend getting familiar with adding your dependencies in [conda.yaml](conda.yaml) to control your Python dependencies and the whole Python environment for your automation.
+1. **Open the Site**: Navigate to the Reuters website.
+2. **Search**: Enter the search phrase and select the news section.
+3. **Retrieve News**: Collect news URLs and extract details from each news article.
+4. **Extract Data**:
+    - Title
+    - Date
+    - Description
+    - Picture filename
+    - Count of search phrases in the title and description
+    - Whether the title or description contains monetary amounts
+5. **Save Data**: Store the extracted data in an Excel file, including downloaded news pictures.
+5. **Delete files**: Deletes files generated after starting the script, keeping space consumption low.
 
-<details>
-  <summary>🙋‍♂️ "Why not just pip install...?"</summary>
+## Requirements
 
-Think of [conda.yaml](conda.yaml) as an equivalent of the requirements.txt, but much better. 👩‍💻 With `conda.yaml`, you are not just controlling your PyPI dependencies; you control the complete Python environment, which makes things repeatable and easy.
+- Python 3.8+
+- Robocorp Framework
+- Pandas
+- Selenium
+- Firefox
 
-👉 You will probably need to run your code on another machine quite soon, so by using `conda.yaml`:
-- You can avoid `Works on my machine` -cases
-- You do not need to manage Python installations on all the machines
-- You can control exactly which version of Python your automation will run on 
-  - You'll also control the pip version to avoid dep. resolution changes
-- No need for venv, pyenv, ... tooling and knowledge sharing inside your team.
-- Define dependencies in conda.yaml, let our tooling do the heavy lifting.
-- You get all the content of [conda-forge](https://prefix.dev/channels/conda-forge) without any extra tooling
+## Installation
 
-> Dive deeper with [these](https://github.com/robocorp/rcc/blob/master/docs/recipes.md#what-is-in-condayaml) resources.
+1. Clone the repository:
 
-</details>
-<br/>
+    ```bash
+    git clone https://github.com/danielcalp/RPA_Challenge_Fresh_news_2.0.git
+    ```
 
-> The full power of [rpaframework](https://robocorp.com/docs/python/rpa-framework) -libraries is also available on Python as a backup while we implement the new Python libraries.
+2. Install the required packages:
 
-## What now?
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-🚀 Now, go get'em
+## Usage
 
-Start writing Python and remember that the AI/LLM's out there are getting really good and creating Python code specifically.
+1. **Set Up Parameters**: Define the parameters in the Robocloud work item or configure them in a configuration file.
+2. **Run the Automation**: Execute the main task using Robocorp Control Room or local execution.
 
-👉 Try out [Robocorp ReMark 💬](https://chat.robocorp.com)
+## Code Overview
 
-For more information, do not forget to check out the following:
-- [Robocorp Documentation -site](https://robocorp.com/docs)
-- [Portal for more examples](https://robocorp.com/portal)
-- Follow our main [robocorp -repository](https://github.com/robocorp/robocorp) as it is the main location where we developed the libraries and the framework.
+- **`selenium_utils.py`**: Contains utility functions for interacting with the browser.
+- **`parse_data_utils.py`**: Functions for parsing news data and checking for monetary values.
+- **`check_date_utils.py`**: Functions for handling and comparing dates.
+- **`task.py`**: The entry point that coordinates the automation workflow.
+- **`save_as_csv.py`**: Handles saving the extracted data to an Excel file.
+- **`remove_files.py`**: Handles deleting generated files from Firefox profile..
+
+## Example
+
+To run the automation locally, you can use the following command:
+
+```bash
+python task.py
+Ensure that the parameters are correctly set in the Variables configuration file or passed via Robocloud work item.
+
+Best Practices and Considerations
+Code Quality: The code adheres to PEP8 standards and follows clean code practices.
+Resiliency: The automation is fault-tolerant and includes error handling for both application and website issues.
+Logging and Debugging: Proper logging should be implemented for real-world use (e.g., using Python's logging module).
+License
+This project is licensed under the MIT License.
+
+Contact
+For any questions or further information, please contact Your Name.
