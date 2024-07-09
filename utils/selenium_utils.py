@@ -40,14 +40,15 @@ def search_in_browser(browser: Selenium, search_input: str, section: str) -> Non
     """
     user_agent = browser.execute_javascript("return navigator.userAgent;")
     logging.info(f'Your actualy user-agent is: {user_agent}')
-    
-    browser.wait_until_element_is_visible('//button[@aria-label="Open search bar"]', timeout=10)
-    browser.click_element('//button[@aria-label="Open search bar"]')
+
     try:
         browser.wait_until_element_is_visible('//*[@id="onetrust-reject-all-handler"]', timeout=10)
         browser.click_element('//*[@id="onetrust-reject-all-handler"]')
     except:
         pass
+    
+    browser.wait_until_element_is_visible('//button[@aria-label="Open search bar"]', timeout=10)
+    browser.click_element('//button[@aria-label="Open search bar"]')
 
     browser.wait_until_element_is_visible('//input[@type="search"]', timeout=10)
     browser.input_text('//input[@type="search"]', search_input)
