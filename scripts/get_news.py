@@ -56,8 +56,16 @@ def start_get_news(main_url: str, search_input: str, section: str, months: int) 
         html_content = browser.get_source()
         with open('output/website_now.html', 'w', encoding='utf-8') as file:
             file.write(html_content)
-        browser.wait_until_page_contains_element('//div[@id="fusion-app"]', timeout=10)
+        try:
+            browser.wait_until_page_contains_element('//div[@id="fusion-app"]', timeout=10)
+        except:
+            pass
         browser.screenshot('//div[@id="fusion-app"]', f'output/new_screenshoot.png')
+        try:
+            browser.wait_until_page_contains_element('//*[@class="captcha__human"]', timeout=10)
+            logging.critical(f"GeoCaptcha has been detected, please use a VPN or Proxy on your system")
+        except:
+            pass
         raise
 
     finally:
