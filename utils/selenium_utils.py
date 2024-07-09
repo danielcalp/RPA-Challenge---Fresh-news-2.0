@@ -15,7 +15,7 @@ def open_site(browser: Selenium, main_url: str) -> None:
         main_url (str): The URL of the main site to open.
     """
     options = FirefoxOptions()
-    # options.add_argument('--headless')
+    options.add_argument('--headless')
     options.add_argument('--start-maximized')
     options.add_argument('--incognito')
     options.set_preference("general.useragent.override", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/127.0")
