@@ -1,5 +1,7 @@
 # Template: Python - Minimal
 
+If the tool is being detected by GeoCaptcha, try using a VPN or proxy on the system
+
 This template leverages the new [Python framework](https://github.com/robocorp/robocorp), the [libraries](https://github.com/robocorp/robocorp/blob/master/docs/README.md#python-libraries) from to same project as well.
 
 The template provides you with the basic structure of a Python project: logging out of the box and controlling your tasks without fiddling with the base Python stuff. The environment contains the most used libraries, so you do not have to start thinking about those right away. 
