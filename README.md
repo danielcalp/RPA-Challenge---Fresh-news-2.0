@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is a Python-based automation solution for extracting news data from the Reuters website. It was developed as part of the test for the Python Automation Engineer position at Otomatika. The goal is to showcase the ability to build a bot that automates the process of extracting and processing news data using Robocorp's RPA Framework.
+This project is a Python-based automation solution for extracting news data from the Reuters website. It was developed as part of the test for the Python Automation Engineer position. The goal is to showcase the ability to build a bot that automates the process of extracting and processing news data using Robocorp's RPA Framework.
 
 ## 🟢 The Challenge
 
@@ -68,6 +68,10 @@ The process requires the following parameters via a Robocloud work item:
 
 1. **Set Up Parameters**: Define the parameters in the Robocloud work item or configure them in a configuration file.
 2. **Run the Automation**: Execute the main task using Robocorp Control Room or local execution.
+
+## Attention
+
+If the 
 
 ## Code Overview
 
