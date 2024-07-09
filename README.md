@@ -71,7 +71,7 @@ The process requires the following parameters via a Robocloud work item:
 
 ## Attention
 
-If the 
+If GeoCaptcha error occurs, please insert a VPN or Proxy into the system
 
 ## Code Overview
 
