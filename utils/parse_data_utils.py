@@ -50,12 +50,12 @@ def parse_news_data(news_element, search_input: str) -> Dict[str, str]:
     parsed_data = {}
 
     # Extract and store news title
-    title_xpath = './div/header/div/div/h1'
+    title_xpath = './div/header/div/div[contains(@class, "default-article-header")]/h1[@data-testid="Heading"]'
     title = news_element.find_element('xpath', title_xpath).text
     parsed_data['title'] = title
     
     # Extract and store news date
-    date_xpath = './div/header/div/div/div/div[1]/time/span[1]'
+    date_xpath = './div/header/div/div/div/div[1]/time/span[1][contains(@class, "date-line")]'
     date = news_element.find_element('xpath', date_xpath).text
     parsed_data['date'] = date
 
@@ -65,7 +65,7 @@ def parse_news_data(news_element, search_input: str) -> Dict[str, str]:
     parsed_data['description'] = description
 
     # Extract and store news image filename, if available
-    picfile_xpath = './div/div[@data-testid="ArticleBody"]/div/div[1]//div[1]/div/img'
+    picfile_xpath = './div/div[@data-testid="ArticleBody"]/div/div[1]//div[1]/div/img[contains(@src, "cloudfront")]'
     
     try:
         picfile_url = news_element.find_element('xpath', picfile_xpath).get_attribute('src')

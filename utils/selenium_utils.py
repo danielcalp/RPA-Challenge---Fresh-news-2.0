@@ -15,7 +15,7 @@ def open_site(browser: Selenium, main_url: str) -> None:
         main_url (str): The URL of the main site to open.
     """
     options = FirefoxOptions()
-    options.add_argument('--headless')
+    # options.add_argument('--headless')
     options.add_argument('--start-maximized')
     options.add_argument('--incognito')
     options.set_preference("general.useragent.override", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/127.0")
@@ -77,22 +77,20 @@ def get_news_url_list(browser: Selenium, main_url: str) -> List[str]:
     news_urls = []
 
     while True:
-        news_elements_xpath = '//div[@data-testid="SearchReuters"]/div[2]/div[2]/ul/li'
-        browser.wait_until_element_is_visible(news_elements_xpath, timeout=10)
-        news_elements = browser.find_elements(news_elements_xpath)
+        browser.wait_until_element_is_visible('//li[contains(@class, "search-results")]', timeout=10)
+        news_elements = browser.find_elements('//li[contains(@class, "search-results")]')
         
         for element in news_elements:
             href = element.find_element('xpath', './/div').get_attribute('href')
             if href:
                 news_urls.append(main_url + href[1:])
         
-        next_page_button_xpath = '//*[@data-testid="SearchReuters"]/div[2]/div[3]/button[2]'
-        browser.wait_until_element_is_visible(next_page_button_xpath, timeout=10)
-        next_page_button = browser.find_element(next_page_button_xpath)
+        browser.wait_until_element_is_visible('//div[contains(@class, "search-results")]/button[2][@data-testid="Button"]', timeout=10)
+        next_page_button = browser.find_element('//div[contains(@class, "search-results")]/button[2][@data-testid="Button"]')
         if next_page_button.get_attribute('aria-label') == 'Disabled':
             break
         
-        browser.click_element(next_page_button_xpath)
+        browser.click_element('//div[contains(@class, "search-results")]/button[2][@data-testid="Button"]')
 
     return news_urls
 
@@ -109,7 +107,7 @@ def get_news_element(browser: Selenium, url: str) -> Selenium:
         Selenium: The news element.
     """
     browser.go_to(url)
-    news_data_element = '//article[@data-testid="Article"]/div[1]'
+    news_data_element = '//article[@data-testid="Article"]/div[contains(@class, "article__main")]'
     browser.wait_until_element_is_visible(news_data_element, timeout=10)
     return browser.find_element(news_data_element)
 

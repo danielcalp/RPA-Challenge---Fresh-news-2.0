@@ -6,6 +6,8 @@ from robocorp.tasks import task
 from scripts.get_news import start_get_news
 from scripts.save_as_csv import save_to_excel
 from scripts.remove_files import remove_profile_files
+
+
 def check_folder_exists(output_folder: str) -> None:
     """
     Checks if a folder exists, and creates it if it doesn't.
